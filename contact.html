@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Capstone Project Two</title>
+    <script src="https://kit.fontawesome.com/5349577a67.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body  data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="50">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">KJB</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link" href="index.html">Home</a>
+                <a class="nav-link" href="app.html">Apps</a>
+                <a class="nav-link" href="signup.html">Register</a>
+                <a class="nav-link " href="login.html">Login</a>
+                <a class="nav-link active" aria-current="page" href="#">Contact</a>
+            </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container-fluid contact-container">
+        <div class="row contact-detail">
+            <h2 class="contact-title">Contact Us</h2>
+            <div class="col-lg-6 col-md-6 col-sm-12 contact-info">
+
+                <form action="" id="contact-form">
+                    <div class="contact-section">
+                        <!-- <label for="name">Name</label> -->
+                        <input class="form-control contact-input" type="text" id="name" name="name" placeholder="Your Name" required> <br>
+                        <input class="form-control contact-input" type="email" id="email" name="email" placeholder="Your Email" required> <br>
+                        <input class="form-control contact-input" type="text" id="subject" name="subject" placeholder="Subject" required>
+                        <textarea class="form-control message-input" name="message" id="message" cols="30" rows="4" placeholder="Message" required></textarea>
+                        <button class="contact-btn">Submit</button>
+                    </div>
+        
+                </form>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 contact-info">
+                <div >
+                    <div class="contact-hours">
+                        <h5 class="contact-sub-title">Contact Us</h5>
+                        <ul class="contact-list">
+                            <li>Phone: +1 780 323-5123</li>
+                            <li>Email: contactme@gmail.com</li>
+                        </ul>
+                    </div>
+                    <div class="contact-location">
+                        <h5 class="contact-sub-title">Location</h5>
+                        <ul class="contact-list">
+                            <li>Calgary, Alberta T2W 5E7</li>
+                        </ul>
+                    </div>
+                    <div class="contact-links">
+                        <h5 class="contact-sub-title">Follow Us</h5>
+                        <ul class="contact-social-list">
+                            <li><a href="https://github.com/Kevinkjb" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                            <li><a href="https://www.linkedin.com/in/kevin-baguioso-60b2601bb/" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                            <li><a href="https://twitter.com/Psychozen24" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Footer Section -->
+    <section id="footer" class="text-center">
+        <div class="container">
+            <div class="social-list">
+                <ul class=" list-unstyled footer-social">
+                    <li><a href="https://github.com/Kevinkjb" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/kevin-baguioso-60b2601bb/" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                    <li><a href="https://twitter.com/Psychozen24" target="_blank"><i class="fa-brands fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                </ul>
+            </div>
+            <p class="text-uppercase copyrights">&copy; Copyrights KJB. All rights reserved.</p>
+            <p class="designby"><span>Designed by </span><a href="#">Kevin Baguioso</a></p>
+        </div>
+    </section>
+
+
+
+    <script src="index.js"></script>
+    <script>
+        const contactForm = document.querySelector('#contact-form')
+        let nameId = document.querySelector('#name');
+let email = document.querySelector('#email');
+let message = document.querySelector('#message');
+let subject = document.querySelector('#subject')
+
+contactForm.addEventListener('submit' , (e)=>{
+e.preventDefault();
+
+let formData = {
+    name: nameId.value,
+    email: email.value,
+    subject: subject.value,
+    message: message.value
+}
+let xhr = new XMLHttpRequest()
+xhr.open('POST', '/');
+xhr.setRequestHeader('content-type', 'application/json');
+xhr.onload = function(){
+    console.log(xhr.responseText)
+    if(xhr.responseText === 'Success'){
+        alert('Email sent')
+        nameId.value = ''
+        email.value = ''
+        message.value = ''
+    }else{
+        alert('Something went wrong!')
+    }
+}
+xhr.send(JSON.stringify(formData))
+})
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
